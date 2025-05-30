@@ -1,0 +1,42 @@
+  <%- include('partials/header') %>
+  </head>
+  <body class="bg-blue-400 text-gray-800">
+    <header class="bg-indigo-600 shadow-md py-6 mb-8">
+      <h1 class="text-center text-4xl font-bold text-cyan-50">
+        Registered Users
+      </h1>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-cyan-50">Homes List</h2>
+        <a
+          href="/addhome"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          + Add Home
+        </a>
+      </div>
+
+      <% if (registeredhomes.length > 0) { %>
+      <ul class="space-y-4">
+        <% registeredhomes.forEach((homes, index) => { %>
+        <li
+          class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition"
+        >
+          <div class="flex justify-between items-center">
+            <span class="text-lg font-medium"
+              ><%= index + 1 %>. <%= homes.housename %></span
+            >
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <div class="text-center text-black-500 mt-12">
+        No homes registered yet. Click "Add Home" to register your first home.
+      </div>
+      <% } %>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+1- nodemon - package that helps us not to kill the server again and again when we make changes but it will refresh it suddenly
+
+2- npm install nodemon -g --> install nodemon globally
+
+3- npm install nodemon --save-dev -->install all dependencies for development use
+
+4- "start": "nodemon app.js", we run our project by --> npm start
+    "chalu": "node app.js"  we can run by --> npm run chalu

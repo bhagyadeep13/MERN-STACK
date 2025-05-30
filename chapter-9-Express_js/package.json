@@ -1,0 +1,17 @@
+{
+  "name": "errors",
+  "version": "1.0.0",
+  "description": "Errors and debugging",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "chalu": "nodemon app.js"
+  },
+  "author": "Bhagyadeep mahawar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}

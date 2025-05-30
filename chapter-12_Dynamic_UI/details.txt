@@ -1,0 +1,7 @@
+EJS -- embedded javascript
+in .ejs file --> we can use html and javascript
+For html --> use actual syntax  
+
+For javascript --> 
+              1--> <% javascript code %>
+              2--> <%= javascript code for display %>

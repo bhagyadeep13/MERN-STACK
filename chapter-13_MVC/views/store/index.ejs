@@ -1,0 +1,29 @@
+<%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/nav') %>
+
+  <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
+    <h2 class="text-3xl text-red-500 font-bold text-center mb-6">
+      Here are our index Page :
+    </h2>
+
+    <div class="flex flex-wrap justify-center gap-6">
+      <% registeredHomes.forEach(home => { %>
+        <div class="w-80 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+          <img class="h-48 w-full object-cover" src="<%= home.url %>" alt="<%= home.houseName %> image" />
+          <div class="p-4">
+            <h2 class="text-xl font-bold text-gray-800 mb-1"><%= home.houseName %></h2>
+            <p class="text-gray-600 text-sm mb-1"><%= home.location %></p>
+            <div class="mt-2 flex items-center justify-between">
+            <p class="text-gray-800 font-semibold">$<%= home.price %></p>
+            <p class="text-gray-800 font-semibold">*<%= home.rating %></p>
+            </div>
+            <button class="bg-green-300 p-2 border-r-3">Book</button>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+</body>
+</html>
