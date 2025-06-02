@@ -11,13 +11,15 @@ exports.postLogIn = (req, res, next) => {
   console.log(req.body)
   req.session.IsLoggedIn = true;
   //res.cookie("IsLoggedIn",true);  // cookies res ke sath jayegi or client ke server
-  //req.IsLoggedIn = true;          // me store ho jayegi 
+  //req.session.IsLoggedIn = true;          // me store ho jayegi 
   res.redirect("/") // (get method with index page) ki request gayi localhost ko with cookie == "IsLoggedIn",true on browser
 };
 
 exports.postLogOut = (req, res, next) => {
   //res.cookie("IsLoggedIn",false);
-  res.redirect('/login')
+  req.session.destroy(() => {
+    res.redirect('/login')
+  });
 };
 
 
