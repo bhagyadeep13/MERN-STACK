@@ -1,0 +1,88 @@
+<header class="bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-lg">
+  <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+    <!-- Logo / Brand -->
+    <div class="flex items-center space-x-2">
+      <a
+        href="/"
+        class="text-3xl font-extrabold tracking-wide transition duration-300 bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 bg-clip-text text-transparent drop-shadow-lg font-cursive"
+        style="font-family: 'Pacifico', cursive"
+      >
+        <span class="text-blue-700 animate-pulse">Stay</span><span class="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent ml-1">Ease</span>
+      </a>
+    </div>
+    <!-- Navigation Links -->
+    <ul class="flex items-center space-x-2 md:space-x-6 font-medium">
+      <li>
+        <a
+          href="/about"
+          class="py-2 px-4 rounded-lg transition duration-300 <%= currentPage === 'AboutUs' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >AboutUs</a
+        >
+      </li>
+      <% if (IsLoggedIn) { %> <% if (user && user.userType === 'guest') { %>
+      <li>
+        <a
+          href="/homes"
+          class="py-2 px-4 rounded-lg transition duration-300 <%= currentPage === 'Home' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >Homes-List</a
+        >
+      </li>
+      <li>
+        <a
+          href="/favourites"
+          class="py-2 px-4 rounded-lg transition duration-300 <%= currentPage === 'favourites' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >Favourites</a
+        >
+      </li>
+      <li>
+        <a
+          href="/bookings"
+          class="py-2 px-4 rounded-lg transition duration-300 <%= currentPage === 'bookings' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >Bookings</a
+        >
+      </li>
+      <% } %> <% if (user && user.userType === 'host') { %>
+      <li>
+        <a
+          href="/host/host-home-list"
+          class="py-2 px-4 rounded-lg transition duration-300 <%= currentPage === 'host-homes' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >Edit Your Homes</a
+        >
+      </li>
+      <li>
+        <a
+          href="/host/add-home"
+          class="py-2 px-4 rounded-lg transition duration-300 <%= currentPage === 'addHome' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >Add New Home</a
+        >
+      </li>
+      <% } %> <% } %> <% if (!IsLoggedIn) { %>
+      <li>
+        <a
+          href="/signup"
+          class="py-2 px-4 rounded-lg transition duration-300 hover:bg-white hover:text-red-500"
+          >Sign Up</a
+        >
+      </li>
+      <li>
+        <a
+          href="/login"
+          class="py-2 px-4 rounded-lg transition duration-300 hover:bg-white hover:text-red-500"
+          >Login</a
+        >
+      </li>
+      <% } else { %>
+      <li>
+        <form action="/logout" method="POST">
+          <button
+            type="submit"
+            class="py-2 px-4 rounded-lg transition duration-300 hover:bg-white hover:text-red-500"
+          >
+            Logout
+          </button>
+        </form>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
