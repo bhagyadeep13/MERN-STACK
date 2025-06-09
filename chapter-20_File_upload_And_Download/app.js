@@ -105,8 +105,8 @@ app.use('/host',(req,res,next)=>{
   {
     res.redirect('/login')
   }
-})  // pehle request me isLoggedIn == true ho tabhi next karo nhi toh "/" redirect ho
-
+})  
+// pehle request me isLoggedIn == true ho tabhi next karo nhi toh "/" redirect ho
 app.use("/host", hostRouter); 
 
 app.use(errorsController.pageNotFound);

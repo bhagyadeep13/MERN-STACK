@@ -22,10 +22,11 @@
                   <span class="text-gray-700"><%= home.rating %></span>
                 </div>
               </div>
+
               <div class="flex justify-between items-center">
-              <button class="bg-blue-300 p-2 rounded-lg hover:bg-blue-500 transition duration-300">
-              <a href="/homes/<%= home._id %>">Details</a>
-              </button>
+
+                <a href="/homes/<%= home._id %>" class="p-2 text-center bg-blue-300 text-black py-3 rounded-lg hover:bg-blue-500 transition duration-300 shadow-md"> Details</a>
+          
               <%- include('../partials/favourite', {home: home}) %>
               </div>
             </div>

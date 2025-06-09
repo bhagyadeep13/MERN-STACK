@@ -119,3 +119,13 @@ exports.postDeleteHome = (req, res, next) => {
       console.log("Error while deleting ", error);
     });
 };
+
+exports.addDetails = async (req,res,next)=>{
+  console.log("hello");
+  res.render('host/details',{
+    pageTitle: "DetailsPage",
+    currentPage: "detailPage",
+    IsLoggedIn: req.session.IsLoggedIn,
+    user: req.session.user,
+  });
+}
