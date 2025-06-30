@@ -71,6 +71,8 @@ exports.postLogIn = async (req, res, next) => {
 exports.postLogOut = (req, res, next) => {
   //res.cookie("IsLoggedIn",false);
   req.session.destroy(() => {
+    req.session = null; // Clear the session
+    console.log("User logged out successfully");
     res.redirect('/login')
   });
 };

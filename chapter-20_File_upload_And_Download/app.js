@@ -1,7 +1,8 @@
-const PORT = 3002;
+/*"multer use": 
+"Multer adds a body object and a file or files object to the request object. The body object contains the values of the text fields of the form, the file or files object contains the files uploaded via the form.",*/
+
 // Core Module
 const path = require('path');
-const User = require('./models/user')
 
 // External Module
 const express = require('express');
@@ -9,8 +10,11 @@ const session = require('express-session')
 const mongoDBStore = require('connect-mongodb-session')(session)
 const multer = require('multer');
 const { default: mongoose } = require('mongoose');
+require('dotenv').config();
+const PORT = process.env.PORT;
+const DB_PATH = process.env.DB_PATH;
 
-const DB_PATH = "mongodb+srv://root:root@airbnb.qbxkucq.mongodb.net/airbnb?retryWrites=true&w=majority&appName=airbnb";
+
 
 //Local Module
 const storeRouter = require("./routes/storeRouter")
@@ -30,6 +34,8 @@ const store = new mongoDBStore({ // MongoDB session store
   collection: 'sessions'
 })
 
+app.use(express.urlencoded());
+
 const randomString = (length) => {
   const characters = 'abcdefghijklmnopqrstuvwxyz';
   let result = '';
@@ -37,11 +43,11 @@ const randomString = (length) => {
     result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
-}
+};
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/images");
+    cb(null, 'uploads');
   },
   filename: (req, file, cb) => {
     cb(null, randomString(10) + '-' + file.originalname);
@@ -49,25 +55,23 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' ||file.mimetype === 'image/png') {
-    cb(null, true); // Accept the file
+  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+    cb(null, true);
   } else {
-    cb(null, false); // Reject the file
+    cb(null, false);
   }
 }
 
 const multerOptions = {
-  storage, fileFilter
-};
+  storage: storage,
+  fileFilter: fileFilter,
+}
 
-app.use(multer(multerOptions).single('photo')); // single file upload with field name 'photo'
-app.use(express.urlencoded());
 app.use(express.static(path.join(rootDir, 'public')))
-
-app.use("/public/images",express.static(path.join(rootDir, 'public/images'))) //
-// Agar home add karne ke samay photo upload karte hain toh public/images path  wali images ki request ko serve karne ke liye use karte hain 
-app.use("/host/public/images",express.static(path.join(rootDir, 'public/images')))
-app.use("/homes/public/images",express.static(path.join(rootDir, 'public/images')))
+app.use(multer(multerOptions).single('photo'));
+app.use("/uploads", express.static(path.join(rootDir, 'uploads')))
+app.use("/host/uploads", express.static(path.join(rootDir, 'uploads')))
+app.use("/homes/uploads", express.static(path.join(rootDir, 'uploads')))
 
 app.use(session({ // session middleware
   secret : "bhagyadeep",
@@ -75,7 +79,6 @@ app.use(session({ // session middleware
   saveUninitialized : false,
   store: store
 }))
-
 /*app.use((req,res,next)=>{
  req.session.IsLoggedIn = req.session.IsLoggedIn
  next()
@@ -110,8 +113,6 @@ app.use('/host',(req,res,next)=>{
 app.use("/host", hostRouter); 
 
 app.use(errorsController.pageNotFound);
-
-
 
 mongoose.connect(DB_PATH).then(() => {
   console.log('Connected to Mongo');
